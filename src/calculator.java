@@ -1,32 +1,63 @@
 /**
- * Класс реализует калькулятор.
+ * The class realize the calculator.
  */
-public class calculator {
+public class Calculator {
+
     /**
-     * Результат вычисления.
+     * The calculation result.
      */
     private int result;
 
     /**
-     * Суммируем аргументы.
-     * @param params Аргументы суммирования.
+     * Summarizes the numbers
+     * @param params numbers
      */
     public void add(int ... params) {
-	    for (Integer param : params) {
+        for (Integer param : params) {
             this.result += param;
         }
     }
 
     /**
-     * Получить результат.
-     * @return результат вычисления.
+     * Subtracts the numbers
+     * @param params numbers
+     */
+    public void sub(int ... params) {
+        for (Integer param : params) {
+            this.result -= param;
+        }
+    }
+
+    /**
+     * Multiplies the numbers
+     * @param params numbers
+     */
+    public void multiply(int ... params) {
+        for (Integer param : params) {
+            this.result *= param;
+        }
+    }
+
+    /**
+     * Divides the numbers
+     * @param params numbers
+     */
+    public void divide(int ... params) {
+        for (Integer param : params) {
+            this.result /= param;
+        }
+    }
+
+    /**
+     * Get the result.
+     * @return the calculation result.
      */
     public int getResult() {
         return this.result;
     }
 
     /**
-     * Очистить результат вычисления.
+     * Clean the calculation result.
      */
     public void cleanResult() {
         this.result = 0;

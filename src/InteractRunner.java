@@ -5,9 +5,9 @@
 import java.util.Scanner;
 
 public class InteractRunner {
-    private int firstNumber;           //first arg
-    private int secondNumber;          //second arg
-    private String operation;         //operation
+    private int firstNumber;        //first arg
+    private int secondNumber;       //second arg
+    private String operation;       //operation
     private Scanner scanner;        //scan input args throw cmd
     private Calculator calculator;  //copy of Calc
     private String exit;            //exit from Calc
@@ -22,7 +22,7 @@ public class InteractRunner {
     /**
      * Constructor
      */
-    private InteractRunner() {
+    public InteractRunner() {
         scanner = new Scanner(System.in);
         calculator = new Calculator();
         this.isClean = true;
@@ -32,7 +32,7 @@ public class InteractRunner {
     /**
      * Start the calculator
      */
-    private void start() {
+    public void start() {
         while (!exit.equals("yes")) {
             try {
                 requestData();
@@ -49,7 +49,7 @@ public class InteractRunner {
     /**
      * Ask the user "Exit the app?"
      */
-    private void requestExitApp() {
+    public void requestExitApp() {
         System.out.println("Exit? yes/no");
         exit = scanner.next();
         if (!validateYesNo(exit)) {
@@ -90,7 +90,7 @@ public class InteractRunner {
             System.out.println("Enter first arg: ");
             this.firstNumber = Integer.valueOf(scanner.next());
         } else {
-            this.firstNumber = 0;
+            this.firstNumber = calculator.getResult();
         }
         requestOperator();
         System.out.println("Enter second arg: ");
@@ -147,9 +147,8 @@ public class InteractRunner {
                 break;
             case '/':
                 if (this.firstNumber != 0) calculator.divide(this.firstNumber);
-                if (this.secondNumber != 0) calculator.divide(this.firstNumber);
+                if (this.secondNumber != 0) calculator.divide(this.secondNumber);
                 break;
         }
     }
 }
-
