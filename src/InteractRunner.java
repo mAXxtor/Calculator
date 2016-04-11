@@ -22,7 +22,7 @@ public class InteractRunner {
     /**
      * Constructor
      */
-    public InteractRunner() {
+    private InteractRunner() {
         scanner = new Scanner(System.in);
         calculator = new Calculator();
         this.isClean = true;
@@ -34,22 +34,18 @@ public class InteractRunner {
      */
     public void start() {
         while (!exit.equals("yes")) {
-            try {
                 requestData();
                 calculate();
                 System.out.println("Result is: " + calculator.getResult());
                 requestClean();
                 requestExitApp();
-            } catch (NumberFormatException e) {
-                System.out.println("ERROR. Please input only an integer");
-            }
         }
     }
 
     /**
      * Ask the user "Exit the app?"
      */
-    public void requestExitApp() {
+    private void requestExitApp() {
         System.out.println("Exit? yes/no");
         exit = scanner.next();
         if (!validateYesNo(exit)) {
@@ -83,18 +79,44 @@ public class InteractRunner {
     }
 
     /**
-     * Request the user data
+     * Request the user input data
      */
     private void requestData() {
         if (this.isClean) {
-            System.out.println("Enter first arg: ");
-            this.firstNumber = Integer.valueOf(scanner.next());
+            requestFirstArg();
         } else {
             this.firstNumber = calculator.getResult();
         }
         requestOperator();
+        requestSecondArg();
+    }
+
+    /**
+     * Request the user input first argument
+     * and check the argument is number
+     */
+    private void requestFirstArg() {
+        System.out.println("Enter first arg: ");
+        try {
+            this.firstNumber = Integer.valueOf(scanner.next());
+        } catch (Exception e) {
+            System.out.println("ERROR. Please enter only numeric arg!");
+            requestFirstArg();
+        }
+    }
+
+    /**
+     * Request the user input second argument
+     * and check the argument is number
+     */
+    private void requestSecondArg() {
         System.out.println("Enter second arg: ");
-        this.secondNumber = Integer.valueOf(scanner.next());
+        try {
+            this.secondNumber = Integer.valueOf(scanner.next());
+        } catch (Exception e) {
+            System.out.println("ERROR. Please enter only numeric arg!");
+            requestSecondArg();
+        }
     }
 
     /**
@@ -117,6 +139,7 @@ public class InteractRunner {
         System.out.println("Choose the operation: plus'+', sub'-', multi'*', divide'/'");
         this.operation = scanner.next();
         if (!validateOperator()) {
+            System.out.println("Please choose the right operation");
             requestOperator();
         }
     }
@@ -146,8 +169,13 @@ public class InteractRunner {
                 calculator.multiply(this.firstNumber, this.secondNumber);
                 break;
             case '/':
-                if (this.firstNumber != 0) calculator.divide(this.firstNumber);
-                if (this.secondNumber != 0) calculator.divide(this.secondNumber);
+                if (this.secondNumber != 0) {
+                    calculator.divide(this.firstNumber, this.secondNumber);
+                } else {
+                    System.out.println("ERROR. You can't divide on 0!");
+                    requestSecondArg();
+                    calculator.divide(this.firstNumber, this.secondNumber);
+                }
                 break;
         }
     }

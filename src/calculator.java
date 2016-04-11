@@ -10,42 +10,30 @@ public class Calculator {
 
     /**
      * Summarizes the numbers
-     * @param params numbers
      */
-    public void add(int ... params) {
-        for (Integer param : params) {
-            this.result += param;
-        }
+    public void add(int a, int b) {
+            this.result = a + b;
     }
 
     /**
      * Subtracts the numbers
-     * @param params numbers
      */
-    public void sub(int ... params) {
-        for (Integer param : params) {
-            this.result -= param;
-        }
+    public void sub(int a, int b) {
+        this.result = a - b;
     }
 
     /**
      * Multiplies the numbers
-     * @param params numbers
      */
-    public void multiply(int ... params) {
-        for (Integer param : params) {
-            this.result *= param;
-        }
+    public void multiply(int a, int b) {
+            this.result = a * b;
     }
 
     /**
      * Divides the numbers
-     * @param params numbers
      */
-    public void divide(int ... params) {
-        for (Integer param : params) {
-            this.result /= param;
-        }
+    public void divide(int a, int b) {
+            this.result = a / b;
     }
 
     /**
